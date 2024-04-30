@@ -47,23 +47,23 @@ class Complex {
     Complex multiply3(Complex c1, Complex c2, Complex c3) {  //Multiplication  of three complex numbers..
         return multiply2(multiply2(c1, c2), c3);
     }
+    float absoluteValue(float x,float y){
+        return (float) Math.sqrt(x*x+y*y);
+    }
 
-    Complex[] maxMin(Complex arr[]) {    //Max and Min among complex numbers...
-//        System.out.println(arr[0].real);
-        float realMax = arr[0].real, img = arr[0].img;
-        float realMin = arr[0].real, img1 = arr[0].img;
-        for (int i = 0; i < arr.length - 1; i++) {
-            if ((realMin < (arr[i + 1].real))) {
-                realMax = arr[i + 1].real;
-                img = arr[i + 1].img;
-            } else if (realMin > arr[i + 1].real) {
-                realMin = arr[i + 1].real;
-                img1 = arr[i + 1].img;
+    //Max and Min among complex numbers...
+    Complex[] maxMin(Complex ...arr) {
+        Complex max=arr[0];
+        Complex min=arr[0];
+        for(Complex c:arr){
+            if(absoluteValue(c.real,c.img)>absoluteValue(max.real, max.img)){
+                max=c;
+            }
+            if(absoluteValue(c.real,c.img)<absoluteValue(min.real, min.img)){
+                min=c;
             }
         }
-        Complex c4 = new Complex(realMax, img);
-        Complex c5 = new Complex(realMin, img1);
-        Complex[] MinMax = {c4, c5};
+        Complex[] MinMax = {max, min};
         return MinMax;
     }
 
@@ -123,11 +123,11 @@ public class Main extends Exception {
 //                    System.out.println("No matching length");
 //            }
             //Max of N complex numbers...
-//            Complex[] minMax = c.maxMin(arrOfComplexNumbers);
-//            System.out.print("Maximum of Complex numbers is: ");
-//            minMax[0].showComplex();
-//            System.out.print("Minimum of Complex numbers is: ");
-//            minMax[1].showComplex();
+            Complex[] minMax = c.maxMin(arrOfComplexNumbers);
+            System.out.print("Maximum of Complex numbers is: ");
+            minMax[0].showComplex();
+            System.out.print("Minimum of Complex numbers is: ");
+            minMax[1].showComplex();
 
             //Average of Complex Numbers....
             Complex avg = c.average(arrOfComplexNumbers);
